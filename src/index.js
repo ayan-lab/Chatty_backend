@@ -9,7 +9,7 @@ import { app, server } from "./lib/socket.js";
 
 dotenv.config();
 
-const port = 5001
+const port = process.env.PORT
 
 app.use(express.json());
 app.use(cookieParser());

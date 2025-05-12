@@ -14,17 +14,17 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t integrationninjas/nodejs-app  .
+        run: docker build -t spike945/nodejs  .
       - name: Publish Image to docker hub
-        run: docker push integrationninjas/nodejs-app:latest 
+        run: docker push spike945/nodejs:latest 
  
   deploy:
     needs: build
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull integrationninjas/nodejs-app:latest 
+        run: docker pull spike945/nodejs:latest 
       - name: Delete old container
         run: docker rm -f nodejs-app-container  
       - name: Run Docker Container
-        run: docker run -d -p 8000:8000 --name nodejs-app-container -e MONGO_PASSWORD='${{ secrets.MONGO_PASSWORD }}' spike945/nodejs-app
+        run: docker run -d -p 8000:8000 --name nodejs-app-container -e MONGO_PASSWORD='${{ secrets.MONGO_PASSWORD }}' spike945/nodejs
